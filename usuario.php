@@ -16,18 +16,19 @@
 
 
     <section id="Registro">
-        <div id="Reg">
+        <article id="Reg">
             <h2>Iniciar sesion</h2>
             <form action="">
                 <label for="nombre">Nombre de usuario</label>
                 <input type="text" id="nombre">
                 <label for="Contraseña">Contraseña</label>
                 <input type="password" id="Contraseña">
-                <input type="submit" value="Inicio de sesion" id="InicioSesion">
-            </form>
-        </div>
+                <input type="submit" value="Inicio de sesion" id="InicioSesion" class="Enviar">
 
-        <div id="Reg">
+            </form>
+        </article>
+
+        <article id="Reg">
             <h2>Registrarse</h2>
 
             <form action="">
@@ -40,20 +41,19 @@
                 <label for="Contraseña">Contraseña</label>
                 <input type="password" id="Contraseña">
 
-                <label for="Terminos">Aceptar <a href="https://es.wikipedia.org/wiki/Diez_Mandamientos">terminos y servicios:</a> </label>
+                <label class="terminos" for="politica">Acepto los <a href="">terminos y servicios:</a> <input type="checkbox" class="politica"  name="politica" required>
 
-                <input type="checkbox" id="Terminos">
-                Acepto recibir un newsletter promocional de Druidcraft S.A. con nuestras ofertas al día
-                <input type="checkbox" id="SpamDescarado">
+                <input type="submit" value="Registrarse" id="Registrarse" class="Enviar">
 
-                <input type="submit" value="Registrarse" id="Registrarse">
             </form>
-        </div>
+        </article>
 
 
 
     </section>
-
+                    
+    
+    <div id="relleno"></div>
 
     <?php
     include "footer.php";

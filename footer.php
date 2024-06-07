@@ -7,8 +7,9 @@
             <li>D: Cerrado</li>
         </ul>
     </div>
+    <img src="Assets/imagenes/Iconos/logo.png" alt="" id="logo">
     <div id="redes">
-        <p>Follow Us: </p>
+        <p>Sigue nos en: </p>
         <a href="https://twitter.com/aXoZerr/status/1728590305597800621">
             <img src="Assets/imagenes/Iconos/X_icon_2.svg.png">
         </a>

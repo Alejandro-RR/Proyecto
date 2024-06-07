@@ -13,7 +13,7 @@
     <?php
     include "header.php";
     ?>
-    <img src="Assets/imagenes/header1.jpg" alt="" id="img1">
+    <img src="Assets/imagenes/imgInicio.jpg" alt="" id="img1">
 
 
     <section id="sect1">
@@ -29,8 +29,9 @@
     <section id="sect2">
         <div id="div2" class="Textocentrado">
             <h2>Flores según el mes</h2>
-
-            <img src="Assets/imagenes/calendario_movil.png" alt="" class="img3">
+            
+                <img src="" alt="" id="florDelMes" height="200" width="300">
+           
         </div>
 
     </section>
