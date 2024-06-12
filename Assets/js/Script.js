@@ -1,3 +1,51 @@
+<<<<<<< Updated upstream
+=======
+var nombreArchivo = document.title;
+
+if (nombreArchivo == "inicio") {
+
+  var fecha = new Date();
+
+  var florDelMes = fecha.getMonth();
+  
+  
+  var imagenes = ["Assets/imagenes/FloresMes/Flores_Enero.jpg",
+    "Assets/imagenes/FloresMes/Flores_Febrero.jpg",
+    "Assets/imagenes/FloresMes/Flores_Marzo.jpg",
+    "Assets/imagenes/FloresMes/Flores_Abril.jpg",
+    "Assets/imagenes/FloresMes/Flores_Mayo.jpg",
+    "Assets/imagenes/FloresMes/Flores_Junio.jpg",
+    "Assets/imagenes/FloresMes/Flores_Julio.jpg",
+    "Assets/imagenes/FloresMes/Flores_Agosto.jpg",
+    "Assets/imagenes/FloresMes/Flores_Septiembre.jpg",
+    "Assets/imagenes/FloresMes/Flores_Octubre.jpg",
+    "Assets/imagenes/FloresMes/Flores_Noviembre.jpg",
+    "Assets/imagenes/FloresMes/Flores_Diciembre.jpg"
+  ];
+  
+  
+  function cambiarImagen() {
+    var imagen = document.getElementById("florDelMes");
+    imagen.src = imagenes[florDelMes];
+  }
+  cambiarImagen();
+  
+  
+  var imagenes2 = ["Assets/imagenes/flores-2.jpg","Assets/imagenes/flores-3.png","Assets/imagenes/flores-1.jpg","Assets/imagenes/flores-4.jpg"];
+  var indice2 = 0;
+  function cambiarImagen2() {
+      var imagen2 = document.getElementById("img2");
+      imagen2.src = imagenes2[indice2];
+      indice2 = (indice2 + 1) % imagenes2.length;
+  }
+  setInterval(cambiarImagen2, 3500);
+  cambiarImagen2();
+
+
+}
+
+
+>>>>>>> Stashed changes
 $(document).ready(function () {
   // Todos los slides de la parte Preguntas frecuentes
   $("#cuadroSlide1").slideUp(0);
@@ -130,6 +178,7 @@ $(document).ready(function () {
   });
 
 
+<<<<<<< Updated upstream
   var imagenes = [
     "Assets/imagenes/FloresMes/Flores_Enero.jpg",
     "Assets/imagenes/FloresMes/Flores_Febrero.jpg",
@@ -152,6 +201,8 @@ $(document).ready(function () {
   }
   
   cambiarImagen();
+=======
+>>>>>>> Stashed changes
 
 });
 
@@ -164,6 +215,9 @@ function limpiarFormulario() {
     formularioUser.removeChild(formularioUser.firstChild);
   }
 }
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
