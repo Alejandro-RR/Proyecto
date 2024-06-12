@@ -14,7 +14,14 @@ body {
     margin: 10px 0;
     cursor: pointer;
 }
+<<<<<<< Updated upstream
 
+=======
+.limpiarLink{
+    text-decoration: none;
+    color: white;
+}
+>>>>>>> Stashed changes
 .Textocentrado {
     text-align: center;
 }
@@ -81,6 +88,18 @@ footer div {
     transition: background-color 0.5s ease
 }
 
+<<<<<<< Updated upstream
+=======
+#userInfo{
+    display: flex;
+    align-self: center;
+    border: 1px black solid;
+    width: 70%;
+    margin: 80px 0;
+    padding: 20px;
+}
+
+>>>>>>> Stashed changes
 
 /*--------------------------------------------DISEÑO MOVIL----------------------------------------------------------- */
 
@@ -99,12 +118,21 @@ footer div {
         height: 250px;
     }
 
+<<<<<<< Updated upstream
     .img2 {
         display: flex;
         align-self: center;
         width: 80%;
         height: 210px;
         margin-top: 30px;
+=======
+    .imgInicio {
+        display: flex;
+        align-self: center;
+        width: 90%;
+        height: 310px;
+        margin: 50px 0;
+>>>>>>> Stashed changes
     }
 
     #MostrarMenu {
@@ -155,9 +183,12 @@ footer div {
         transform: translateY(0%);
     }
 
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
     #calendario {
         width: 100%;
     }
@@ -253,7 +284,15 @@ iframe {
 }
 
 
+<<<<<<< Updated upstream
 
+=======
+#florDelMes{
+    width: 90%;
+    min-height: 500px;
+
+}
+>>>>>>> Stashed changes
 
 
 
