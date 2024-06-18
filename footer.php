@@ -9,7 +9,7 @@
     </div>
     <img src="Assets/imagenes/Iconos/logo.png" alt="" id="logo">
     <div id="redes">
-        <p>Sigue nos en: </p>
+        <p>Siguenos en: </p>
         <a href="https://twitter.com/aXoZerr/status/1728590305597800621">
             <img src="Assets/imagenes/Iconos/X_icon_2.svg.png">
         </a>

@@ -11,7 +11,7 @@
     setcookie(session_name(), null, time() - 1000); // eliminar la cookie
 
     // Redirigimos al usuario al formulario de login
-    header("Location: login.php");
+    header("Location: usuario.php");
 
     // Salimos del script
     exit();
