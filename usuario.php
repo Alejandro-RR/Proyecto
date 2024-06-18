@@ -8,9 +8,20 @@ if (isset($_POST['InicioSesion'])) {
     $password = $_POST['pwd'];
     if (!empty($nombre) && !empty($password)) {
 
-        include("conexion.php");
         // Parámetros de conexión
-        $conexion = conectarBD();
+        $servidor = 'localhost';
+        $bd = 'floristeria';
+        $user = 'root';
+        $pwd = '';
+
+        // Establecimiento de la conexión
+        $conexion = new mysqli($servidor, $user, $pwd, $bd);
+
+        // Comprobamos la conexión
+        if ($conexion->connect_errno) {
+            echo "Error al conectar a MySQL: " . $conexion->connect_error;
+            exit();
+        }
 
         // Consulta a la base de datos
         $usuario = "SELECT Nombre FROM `usuarios`";
@@ -35,6 +46,7 @@ if (isset($_POST['InicioSesion'])) {
                 $contraseñas[] = $fila['Contraseña'];
             }
         }
+        $conexion->close();
 
         //Comprobar si algun usuario y la contraseña de la base de datos coinciden con el usuario y la contraseña introducidos 
         $existe = false;
@@ -44,10 +56,7 @@ if (isset($_POST['InicioSesion'])) {
                 $existe  = true;
             }
         }
-        // Desconectamos de la BD
-        desconectarBD($conexion);
 
-        //Si el usuario existe en la BD asignamos valores y el rol de Admin o user
         if (($existe  == true)) {
             session_start();
             $_SESSION['usuario'] = $nombre;
@@ -56,11 +65,11 @@ if (isset($_POST['InicioSesion'])) {
             if (($nombre == "Admin" && $password == "Admin")) {
                 // Almacenamos el usuario en la sesión
                 $_SESSION['rol'] = "Admin";
-                header("Location: usuario.php");
+                header("Location: usuario.php"); // Redirigimos a la página de administrador
                 exit();
             } else {
                 $_SESSION['rol'] = "user";
-                header("Location: usuario.php");
+                header("Location: usuario.php"); // Redirigimos a la página de usuario
                 exit();
             }
         }
@@ -70,13 +79,8 @@ if (isset($_POST['InicioSesion'])) {
 
 
 
-// Comprobar si se envio el formulario para registrarse
+
 if (isset($_POST['Registrarse'])) {
-
-
-    include("conexion.php");
-    // Parámetros de conexión
-    $conexion = conectarBD();
 
     // Guardamos los valores enviados por el formulario y los comprobamos con los datos de la base de datos
     $nombre = $_POST['nombre'];
@@ -85,7 +89,20 @@ if (isset($_POST['Registrarse'])) {
 
     if (!empty($nombre) && !empty($password)) {
 
+        // Parámetros de conexión
+        $servidor = 'localhost';
+        $bd = 'floristeria';
+        $user = 'root';
+        $pwd = '';
 
+        // Establecimiento de la conexión
+        $conexion = new mysqli($servidor, $user, $pwd, $bd);
+
+        // Comprobamos la conexión
+        if ($conexion->connect_errno) {
+            echo "Error al conectar a MySQL: " . $conexion->connect_error;
+            exit();
+        }
 
         // Consulta a la base de datos
         $usuario = "SELECT Nombre FROM `usuarios`";
@@ -122,21 +139,19 @@ if (isset($_POST['Registrarse'])) {
             }
         }
 
-
-        //Si no se repite el nombre de usuario o correo se añade el usuario a la BD y se inicia sesion.
         if (($NoRepite  == true)) {
 
             $fechaActual = date('Y-m-d H:i:s');
 
             $añadirUser = "INSERT INTO `usuarios`(`Nombre`, `Contraseña`, `Correo`, `Fecha`) VALUES ('$nombre','$password','$email','$fechaActual')";
             $insrtarUser = $conexion->query($añadirUser);
-            desconectarBD($conexion);
+            $conexion->close();
             session_start();
             $_SESSION['usuario'] = $nombre;
             $_SESSION['rol'] = "user";
             header("Location: usuario.php");
         } else {
-            desconectarBD($conexion);
+            $conexion->close();
         }
     }
 }
@@ -153,15 +168,11 @@ if (isset($_POST['Registrarse'])) {
     <script src="Assets/js/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="Assets/Style.css">
     <link rel="icon" href="Assets/imagenes/Iconos/logo.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <?php
-    session_start();
+    session_start(); // Asegúrate de iniciar la sesión al principio del archivo
 
     include "header.php";
 
@@ -184,19 +195,15 @@ if (isset($_POST['Registrarse'])) {
 
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                     <label for="nombre">Nombre de usuario</label>
-                    <input type="text" name="nombre" id="nombre" value="<?php if (isset($_POST['nombre'])) echo $_POST['nombre']; ?>" size="50" required><br><br>
-                    <p id="malNom"></p>
+                    <input type="text" name="nombre" value="<?php if (isset($_POST['nombre'])) echo $_POST['nombre']; ?>" size="50" required><br><br>
 
                     <label for="Email">Correo</label>
-                    <input type="email" name="email" id="correo" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" size="50" required><br><br>
-                    <p id="malEmail"></p>
+                    <input type="email" name="email" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>" size="50" required><br><br>
 
                     <label for="Contraseña">Contraseña</label>
                     <input type="password" name="pwd" required size="50"><br>
 
-                    <label class="terminos" for="politica">Acepto los <a href="https://es.wikipedia.org/wiki/Diez_Mandamientos">terminos y servicios:</a>
-
-                        <input type="checkbox" class="politica" name="politica" required>
+                    <label class="terminos" for="politica">Acepto los <a href="">terminos y servicios:</a> <input type="checkbox" class="politica" name="politica" required>
 
                         <input type="submit" value="Registrarse" id="Registrarse" class="Enviar" name="Registrarse">
 
@@ -207,51 +214,55 @@ if (isset($_POST['Registrarse'])) {
         <div id="relleno"></div>
 
     <?php
+        include "footer.php";
     } else {
 
 
 
-        include("conexion.php");
-        // Parámetros de conexión
-        $conexion = conectarBD();
-        // Se consulta en la base de datos la informacion del usuario para mostrarla más tarde
+        $servidor = 'localhost';
+        $bd = 'floristeria';
+        $user = 'root';
+        $pwd = '';
+
+        // Establecimiento de la conexión
+        $conexion = new mysqli($servidor, $user, $pwd, $bd);
+
+        // Comprobamos la conexión
+        if ($conexion->connect_errno) {
+            echo "Error al conectar a MySQL: " . $conexion->connect_error;
+            exit();
+        }
+
         $nombre = $_SESSION['usuario'];
         $consulta = "SELECT * FROM `usuarios` WHERE `Nombre` = '$nombre'";
+
         $infoUser = $conexion->query($consulta);
+
         $datosUsuario = $infoUser->fetch_assoc();
+
         $correo = $datosUsuario['Correo'];
         $fecha = $datosUsuario['Fecha'];
 
-        desconectarBD($conexion);
+
     ?>
         <section id="userInfo">
             <article>
+                <h2>Nombre de usuario:</h2>
+                <?php echo $nombre; ?>
+                <br>
+                <h2>Correo:</h2>
+                <?php echo $correo; ?>
+                <br>
+                <h2>Fecha de creacion:</h2>
+                <?php echo $fecha; ?>
+                <br>
 
-                <?php echo "<h3>Nombre de usuario:</h3>$nombre"; ?>
-                <?php echo "<h3>Correo:</h3> $correo"; ?>
-                <?php echo "<h3>Fecha de creacion:</h3> $fecha"; ?>
-                <div id="RegiBotones">
-                    <?php
-                     // Solo si es administrador se mostrara el acceso a la lista de usuarios
-                    if ($_SESSION['rol'] == "Admin") {
-                    ?>
-                        <br><a href="registros.php"><button id="boton">Registros</button></a>
-
-                    <?php
-                    }
-                    ?>
-                    <br>
-                    <a href="CambioConstraseña.php"><button id="boton">Cambiar contraseña</button></a>
-                    <a href="logout.php"><button id="boton">Cerrar sesion</button></a>
-                </div>
+                <a href="logout.php"><button class="Enviar">Cerrar sesion</button></a>
             </article>
         </section>
-        <div id="relleno"></div>
     <?php
     }
-    include "footer.php";
     ?>
-
     <script src="https://kit.fontawesome.com/fef61d9f2b.js" crossorigin="anonymous"></script>
     <script src="Assets/js/Script.js"></script>
 
